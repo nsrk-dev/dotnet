@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <span id="test"></span>
+
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="signalR/hubs"></script>
+
+    <!--http://localhost:57459/signalr/hubs-->
+    <script type="text/javascript">
+        $.connection.hub.start().done(function () {
+            //Connected to server
+            //alert("Connected");
+            $.connection.myHub.server.broadcastServerTime();
+        });
+
+        $.connection.myHub.client.MessageReceiver = function (message) {
+            $("#test").text(message);
+        }
+    </script>
+</body>
+</html>
